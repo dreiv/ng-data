@@ -5,13 +5,11 @@
   },
   "apps": [
     {
-      "serviceWorker": true
-    },
-    {
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets"
+        "assets",
+        "manifest.json"
       ],
       "index": "index.html",
       "main": "main.ts",
