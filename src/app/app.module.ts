@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { SharedModule } from '@app/shared';
 
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared';
 
 @NgModule({
   declarations: [
