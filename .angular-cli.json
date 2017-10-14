@@ -8,13 +8,11 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
-        "manifest.json"
+        "assets"
       ],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
-      "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "prefix": "app",
       "styles": [

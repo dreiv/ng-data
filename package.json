@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
+    "start": "ng serve",
     "build": "ng build",
     "build:ci": "ng build --target production --progress false --build-optimizer --base-href \"https://dreiv.github.io/ng-data/\"",
     "lint": "ng lint --format=stylish --fix"
