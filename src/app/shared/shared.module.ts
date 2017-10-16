@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { DataGridModule } from '../features/data-grid/data-grid.module';
+import { DataGridModule } from '../features/users/users.module';
 
 @NgModule({
   imports: [

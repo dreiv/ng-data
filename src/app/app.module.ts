@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { PersonsService } from './services/persons.service';
+import { UsersService } from './services/users.service';
 import { SharedModule } from './shared';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { SharedModule } from './shared';
     // shared
     SharedModule
   ],
-  providers: [PersonsService],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

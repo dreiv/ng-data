@@ -2,7 +2,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatTableModule } from '@angular/material';
-import { DataGridComponent } from './data-grid.component';
+import { UsersComponent } from './users.component';
 
 @NgModule({
   imports: [
@@ -10,7 +10,7 @@ import { DataGridComponent } from './data-grid.component';
     CdkTableModule,
     MatTableModule
   ],
-  declarations: [DataGridComponent],
-  exports: [DataGridComponent]
+  declarations: [UsersComponent],
+  exports: [UsersComponent]
 })
 export class DataGridModule {}

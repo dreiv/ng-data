@@ -1,3 +1,3 @@
-export * from './model/person.model';
-export * from './type/person.type';
+export * from './model/user.model';
+export * from './type/user.type';
 export * from './shared.module';
