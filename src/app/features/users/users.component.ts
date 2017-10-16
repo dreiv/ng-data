@@ -49,13 +49,17 @@ export class UsersComponent implements OnInit {
     this.connect();
   }
 
+  userTrackBy = (index: number, item: User) => {
+    return item.id;
+  };
+
   connect() {
     this.displayedColumns = [
+      'check',
       'userId',
       'userName'
     ];
 
     this.usersDataSource = new UsersDataSource(this.usersService.dataChange$, this.paginator);
   }
-
 }

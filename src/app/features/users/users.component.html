@@ -1,4 +1,14 @@
-<mat-table [dataSource]="usersDataSource">
+<mat-table [dataSource]="usersDataSource" [trackBy]="userTrackBy">
+
+  <!-- Column Definition: Select -->
+  <ng-container cdkColumnDef="check">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox></mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-checkbox></mat-checkbox>
+    </mat-cell>
+  </ng-container>
 
   <!-- Column Definition: ID -->
   <ng-container cdkColumnDef="userId">
