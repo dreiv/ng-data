@@ -1,14 +1,15 @@
 import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatTableModule } from '@angular/material';
+import { MatPaginatorModule, MatTableModule } from '@angular/material';
 import { UsersComponent } from './users.component';
 
 @NgModule({
   imports: [
     CommonModule,
     CdkTableModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   declarations: [UsersComponent],
   exports: [UsersComponent]
