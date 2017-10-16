@@ -1,31 +1,17 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { MatPaginator, MatSort } from '@angular/material';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 import { Observable } from 'rxjs/Observable';
-import { PersonData, PersonsDatabaseService } from '../../persons-database.service';
+import { PersonsService } from '../../services/persons.service';
+import { Person } from '../../shared';
 
-export class PersonDataSource extends DataSource<PersonData> {
+export class PersonDataSource extends DataSource<Person> {
 
-  constructor(private personsDB: PersonsDatabaseService,
-              private paginator: MatPaginator,
-              private sort: MatSort) {
+  constructor(private persons: PersonsService) {
     super();
   }
 
-  connect(collectionViewer: CollectionViewer): Observable<PersonData[]> {
-    const displayDataChanges = [
-      this.paginator.page,
-      this.sort.sortChange,
-      this.personsDB.data
-    ];
-    return Observable.merge(...displayDataChanges).map(() => {
-      const data = this.personsDB.data.slice();
-
-      // Grab the page's slice of data.
-      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-      return data.splice(startIndex, this.paginator.pageSize);
-    });
+  connect(collectionViewer: CollectionViewer): Observable<Person[]> {
+    return Observable.of(this.persons.data);
   }
 
   disconnect(collectionViewer: CollectionViewer): void {

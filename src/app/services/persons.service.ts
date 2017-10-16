@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-export interface PersonData {
-  id: string;
-  name: string;
-}
+import { Person } from '../shared/type/person.type';
 
 @Injectable()
-export class PersonsDatabaseService {
-  private dataChange$: BehaviorSubject<PersonData[]> = new BehaviorSubject([]);
+export class PersonsService {
+  private dataChange$: BehaviorSubject<Person[]> = new BehaviorSubject([]);
 
   constructor() {
     this.initialize();
   }
 
-  get data(): PersonData[] { return this.dataChange$.value; }
+  get data(): Person[] { return this.dataChange$.value; }
 
   initialize() {
     this.dataChange$.next([]);

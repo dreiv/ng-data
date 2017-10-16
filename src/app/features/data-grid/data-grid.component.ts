@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
-import { PersonsDatabaseService } from '../../persons-database.service';
+import { PersonsService } from '../../services/persons.service';
 import { PersonDataSource } from './person-data-source';
 
 export type UserProperty = 'userId' | 'userName' | undefined;
@@ -22,7 +22,7 @@ export class DataGridComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private personsDB: PersonsDatabaseService) {}
+  constructor(private personsDB: PersonsService) {}
 
   ngOnInit() {
     this.connect();
@@ -34,7 +34,7 @@ export class DataGridComponent implements OnInit {
       UserProperty.Name
     ];
 
-    this.dataSource = new PersonDataSource(this.personsDB, this.paginator, this.sort);
+    this.dataSource = new PersonDataSource(this.personsDB);
   }
 
 }
