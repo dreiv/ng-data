@@ -20,7 +20,7 @@ export class UsersDataSource extends DataSource<User> {
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
-      const data = this.dataChange$.value;
+      const data = this.dataChange$.value.slice();
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
 
       return data.splice(startIndex, this.paginator.pageSize);

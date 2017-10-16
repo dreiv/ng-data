@@ -11,8 +11,6 @@ export class UsersService {
     this.initialize();
   }
 
-  get data() { return this.dataChange$.value; }
-
   initialize() {
     const users = [];
     for (let i = 1; i <= 100; i++) {
