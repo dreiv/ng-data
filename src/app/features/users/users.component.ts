@@ -20,10 +20,9 @@ export class UsersDataSource extends DataSource<User> {
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
-      const data = this.dataChange$.value.slice();
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
 
-      return data.splice(startIndex, this.paginator.pageSize);
+      return this.dataChange$.value.slice(startIndex, startIndex + this.paginator.pageSize);
     });
   }
 
@@ -41,17 +40,14 @@ export class UsersComponent implements OnInit {
   usersDataSource: UsersDataSource | null;
   displayedColumns: string[] = [];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  userTrackBy = (index: number, item: User) => item.id;
+  @ViewChild(MatPaginator) private paginator: MatPaginator;
 
   constructor(public usersService: UsersService) {}
 
   ngOnInit() {
     this.connect();
   }
-
-  userTrackBy = (index: number, item: User) => {
-    return item.id;
-  };
 
   connect() {
     this.displayedColumns = [
