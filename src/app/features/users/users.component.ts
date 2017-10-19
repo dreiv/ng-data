@@ -26,8 +26,7 @@ export class UsersDataSource extends DataSource<UIUser> {
     return Observable.merge(...displayDataChanges).map(() => {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
 
-      return this.dataChange$.value.slice(startIndex, startIndex + this.paginator.pageSize)
-        .map((user: User): UIUser => <UIUser> user);
+      return <UIUser[]> this.dataChange$.value.slice(startIndex, startIndex + this.paginator.pageSize);
     });
   }
 
