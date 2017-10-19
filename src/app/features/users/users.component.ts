@@ -8,12 +8,16 @@ import { Observable } from 'rxjs/Observable';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../shared/type/user.type';
 
-export class UsersDataSource extends DataSource<User> {
+interface UIUser extends User {
+  selected: boolean;
+}
+
+export class UsersDataSource extends DataSource<UIUser> {
   constructor(private dataChange$: BehaviorSubject<User[]>, private paginator: MatPaginator) {
     super();
   }
 
-  connect(): Observable<User[]> {
+  connect(): Observable<UIUser[]> {
     const displayDataChanges = [
       this.paginator.page,
       this.dataChange$
@@ -22,7 +26,8 @@ export class UsersDataSource extends DataSource<User> {
     return Observable.merge(...displayDataChanges).map(() => {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
 
-      return this.dataChange$.value.slice(startIndex, startIndex + this.paginator.pageSize);
+      return this.dataChange$.value.slice(startIndex, startIndex + this.paginator.pageSize)
+        .map((user: User): UIUser => <UIUser> user);
     });
   }
 
@@ -37,11 +42,11 @@ export class UsersDataSource extends DataSource<User> {
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  @ViewChild(MatPaginator) private paginator: MatPaginator;
   usersDataSource: UsersDataSource | null;
   displayedColumns: string[] = [];
 
   userTrackBy = (index: number, item: User) => item.id;
-  @ViewChild(MatPaginator) private paginator: MatPaginator;
 
   constructor(public usersService: UsersService) {}
 
@@ -51,7 +56,7 @@ export class UsersComponent implements OnInit {
 
   connect() {
     this.displayedColumns = [
-      'check',
+      'selected',
       'userId',
       'userName'
     ];

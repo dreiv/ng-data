@@ -1,12 +1,12 @@
 <mat-table [dataSource]="usersDataSource" [trackBy]="userTrackBy">
 
   <!-- Column Definition: Select -->
-  <ng-container cdkColumnDef="check">
+  <ng-container cdkColumnDef="selected">
     <mat-header-cell *matHeaderCellDef>
       <mat-checkbox></mat-checkbox>
     </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <mat-checkbox></mat-checkbox>
+      <mat-checkbox [checked]="row.selected"></mat-checkbox>
     </mat-cell>
   </ng-container>
 
