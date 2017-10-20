@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-    <app-data-grid></app-data-grid>`
+    <app-users></app-users>`
 })
 export class AppComponent {
 }
