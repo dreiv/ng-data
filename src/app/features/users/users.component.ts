@@ -1,5 +1,5 @@
 import { DataSource } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
@@ -9,7 +9,7 @@ import { UsersService } from '../../services/users.service';
 import { User } from '../../shared/type/user.type';
 
 interface UIUser extends User {
-  selected: boolean;
+  checked: boolean;
 }
 
 export class UsersDataSource extends DataSource<UIUser> {
@@ -40,10 +40,14 @@ export class UsersDataSource extends DataSource<UIUser> {
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) private paginator: MatPaginator;
   usersDataSource: UsersDataSource | null;
   displayedColumns: string[] = [];
+
+  someChecked: boolean;
+  allChecked: boolean;
+  users: UIUser[];
 
   userTrackBy = (index: number, item: User) => item.id;
 
@@ -53,13 +57,28 @@ export class UsersComponent implements OnInit {
     this.connect();
   }
 
+  ngAfterViewInit(): void {
+    this.usersDataSource.connect().subscribe(users => this.users = users);
+  }
+
   connect() {
     this.displayedColumns = [
-      'selected',
+      'checked',
       'userId',
       'userName'
     ];
 
     this.usersDataSource = new UsersDataSource(this.usersService.dataChange$, this.paginator);
+  }
+
+  updateAllCheckboxes(checked: boolean) {
+    this.users.forEach(user => user.checked = checked);
+  }
+
+  updateMainCheckbox() {
+    const checkedUsersNo = this.users.filter(u => u.checked).length;
+
+    this.someChecked = checkedUsersNo < this.users.length;
+    this.allChecked = checkedUsersNo === this.users.length;
   }
 }
