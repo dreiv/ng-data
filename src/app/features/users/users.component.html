@@ -6,7 +6,8 @@
       <mat-checkbox [checked]="allChecked" [indeterminate]="someChecked" (change)="updateAllCheckboxes($event.checked)"></mat-checkbox>
     </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <mat-checkbox [checked]="row.checked" (change)="updateMainCheckbox()"></mat-checkbox>
+      <mat-checkbox [checked]="row.checked" (change)="updateMainCheckbox()" [(ngModel)]="row.checked"
+                    [ngModelOptions]="{standalone: true}"></mat-checkbox>
     </mat-cell>
   </ng-container>
 

@@ -78,7 +78,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   updateMainCheckbox() {
     const checkedUsersNo = this.users.filter(u => u.checked).length;
 
-    this.someChecked = checkedUsersNo < this.users.length;
+    this.someChecked = checkedUsersNo > 0 && checkedUsersNo < this.users.length;
     this.allChecked = checkedUsersNo === this.users.length;
   }
 }
