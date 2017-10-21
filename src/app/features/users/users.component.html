@@ -36,7 +36,7 @@
 
 </mat-table>
 
-<mat-paginator [length]="usersService.dataChange$.value.length"
+<mat-paginator [length]="totalUsersLength"
                [pageSize]="10"
                [pageSizeOptions]="[10, 25, 50]">
 </mat-paginator>

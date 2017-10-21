@@ -18,11 +18,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
   someChecked: boolean;
   allChecked: boolean;
 
-  private users: UIUser[];
+  private uiUsers: UIUser[];
+  private usersLength: number;
 
   userTrackBy = (index: number, item: User): string => item.id;
 
-  constructor(private usersService: UsersService,
+  constructor(public usersService: UsersService,
               private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.usersDataSource.connect().subscribe((users: UIUser[]): void => {
-      this.users = users;
+      this.uiUsers = users;
       this.updateMainCheckbox();
     });
   }
@@ -43,18 +44,19 @@ export class UsersComponent implements OnInit, AfterViewInit {
       'userName'
     ];
 
+    this.usersService.dataChange$.subscribe(u => this.usersLength = u.length);
     this.usersDataSource = new UsersDataSource(this.usersService.dataChange$, this.paginator);
   }
 
   updateAllCheckboxes(checked: boolean): void {
-    this.users.forEach((u: UIUser): boolean => u.checked = checked);
+    this.uiUsers.forEach(u => u.checked = checked);
   }
 
   updateMainCheckbox(): void {
-    const checkedUsersNo = this.users.filter(u => u.checked).length;
+    const checkedUsersNo = this.uiUsers.filter(u => u.checked).length;
 
-    this.someChecked = checkedUsersNo > 0 && checkedUsersNo < this.users.length;
-    this.allChecked = checkedUsersNo === this.users.length;
+    this.someChecked = checkedUsersNo > 0 && checkedUsersNo < this.uiUsers.length;
+    this.allChecked = checkedUsersNo === this.uiUsers.length;
     this.cdr.markForCheck();
   }
 }
