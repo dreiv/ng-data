@@ -7,7 +7,9 @@
     "start": "ng serve",
     "build": "ng build",
     "build:ci": "ng build --target production --progress false --build-optimizer --base-href \"https://dreiv.github.io/ng-data/\"",
-    "lint": "ng lint --format=stylish --fix"
+    "lint": "ng lint --format=stylish --fix",
+    "precommit": "npm run lint",
+    "prepush": "npm run lint && ng build --aot true"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +33,7 @@
     "@angular/compiler-cli": "^5.0.0-rc.2",
     "@angular/language-service": "^5.0.0-rc.2",
     "codelyzer": "^3.2.1",
+    "husky": "^0.14.3",
     "tslint": "~5.7.0",
     "typescript": "^2.6.0-rc"
   }
