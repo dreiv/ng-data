@@ -1,6 +1,7 @@
 <mat-card class="demo-table-card">
   <h3>Users table
     <button (click)="deleteChecked()">delete</button>
+    <button (click)="addRow()">Add</button>
   </h3>
 
   <mat-table [dataSource]="usersDataSource" [trackBy]="userTrackBy">
@@ -25,13 +26,25 @@
     <!-- Column Definition: ID -->
     <ng-container cdkColumnDef="userId">
       <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-form-field>
+          <input matInput
+                 [(ngModel)]="row.id"
+                 [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+      </mat-cell>
     </ng-container>
 
     <!-- Column Definition: Name -->
     <ng-container matColumnDef="userName">
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-form-field>
+          <input matInput
+                 [(ngModel)]="row.name"
+                 [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+      </mat-cell>
     </ng-container>
 
     <!-- Header and Row Declarations -->

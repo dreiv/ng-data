@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { UsersService } from '../../services/users.service';
+import { UserImpl } from '../../shared/model/user.model';
 import { User } from '../../shared/type/user.type';
 import { UsersDataSource } from './users.data';
 
@@ -62,5 +63,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   deleteChecked() {
     this.usersService.dataChange$.next(this.usersService.data().filter(u => !u.checked));
+  }
+
+  addRow() {
+    this.usersService.data().splice(0, 0, new UserImpl('a', 'b'));
+    this.usersService.dataChange$.next(this.usersService.data());
   }
 }
