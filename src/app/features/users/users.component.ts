@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, O
 import { MatPaginator } from '@angular/material';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../shared/type/user.type';
-import { UIUser, UsersDataSource } from './users.data';
+import { UsersDataSource } from './users.data';
 
 @Component({
   selector: 'app-users',
@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   someChecked: boolean;
   allChecked: boolean;
 
-  private uiUsers: UIUser[];
+  private uiUsers: User[];
   private usersLength: number;
 
   userTrackBy = (index: number, item: User): string => item.id;
@@ -31,7 +31,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.usersDataSource.connect().subscribe((users: UIUser[]): void => {
+    this.usersDataSource.connect().subscribe((users: User[]): void => {
       this.uiUsers = users;
       this.updateMainCheckbox();
     });
@@ -58,5 +58,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.someChecked = checkedUsersNo > 0 && checkedUsersNo < this.uiUsers.length;
     this.allChecked = checkedUsersNo === this.uiUsers.length;
     this.cdr.markForCheck();
+  }
+
+  deleteChecked() {
+    this.usersService.dataChange$.next(this.usersService.data().filter(u => !u.checked));
   }
 }

@@ -1,42 +1,47 @@
-<mat-table [dataSource]="usersDataSource" [trackBy]="userTrackBy">
+<mat-card class="demo-table-card">
+  <h3>Users table
+    <button (click)="deleteChecked()">delete</button>
+  </h3>
 
-  <!-- Column Definition: Select -->
-  <ng-container cdkColumnDef="checked">
-    <mat-header-cell *matHeaderCellDef>
-      <mat-checkbox [checked]="allChecked"
-                    [indeterminate]="someChecked"
-                    (change)="updateAllCheckboxes($event.checked)">
-      </mat-checkbox>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let row">
-      <mat-checkbox [checked]="row.checked"
-                    (change)="updateMainCheckbox()"
-                    [(ngModel)]="row.checked"
-                    [ngModelOptions]="{standalone: true}">
+  <mat-table [dataSource]="usersDataSource" [trackBy]="userTrackBy">
 
-      </mat-checkbox>
-    </mat-cell>
-  </ng-container>
+    <!-- Column Definition: Select -->
+    <ng-container cdkColumnDef="checked">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox [checked]="allChecked"
+                      [indeterminate]="someChecked"
+                      (change)="updateAllCheckboxes($event.checked)">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox [checked]="row.checked"
+                      (change)="updateMainCheckbox()"
+                      [(ngModel)]="row.checked"
+                      [ngModelOptions]="{standalone: true}">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
 
-  <!-- Column Definition: ID -->
-  <ng-container cdkColumnDef="userId">
-    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
-  </ng-container>
+    <!-- Column Definition: ID -->
+    <ng-container cdkColumnDef="userId">
+      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
+    </ng-container>
 
-  <!-- Column Definition: Name -->
-  <ng-container matColumnDef="userName">
-    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
-  </ng-container>
+    <!-- Column Definition: Name -->
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+    </ng-container>
 
-  <!-- Header and Row Declarations -->
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
-</mat-table>
+  </mat-table>
 
-<mat-paginator [length]="totalUsersLength"
-               [pageSize]="10"
-               [pageSizeOptions]="[10, 25, 50]">
-</mat-paginator>
+  <mat-paginator [length]="usersLength"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[10, 25, 50]">
+  </mat-paginator>
+</mat-card>

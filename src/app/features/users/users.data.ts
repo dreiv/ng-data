@@ -6,16 +6,12 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../shared/type/user.type';
 
-export interface UIUser extends User {
-  checked: boolean;
-}
-
-export class UsersDataSource extends DataSource<UIUser> {
+export class UsersDataSource extends DataSource<User> {
   constructor(private dataChange$: BehaviorSubject<User[]>, private paginator: MatPaginator) {
     super();
   }
 
-  connect(): Observable<UIUser[]> {
+  connect(): Observable<User[]> {
     const displayDataChanges = [
       this.paginator.page,
       this.dataChange$
@@ -24,7 +20,7 @@ export class UsersDataSource extends DataSource<UIUser> {
     return Observable.merge(...displayDataChanges).map(() => {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
 
-      return <UIUser[]> this.dataChange$.value.slice(startIndex, startIndex + this.paginator.pageSize);
+      return this.dataChange$.value.slice(startIndex, startIndex + this.paginator.pageSize);
     });
   }
 

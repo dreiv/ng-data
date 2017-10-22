@@ -2,7 +2,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatCheckboxModule, MatPaginatorModule, MatTableModule } from '@angular/material';
+import { MatCardModule, MatCheckboxModule, MatPaginatorModule, MatTableModule } from '@angular/material';
 import { UsersComponent } from '../features/users/users.component';
 
 @NgModule({
@@ -11,6 +11,7 @@ import { UsersComponent } from '../features/users/users.component';
     FormsModule,
 
     CdkTableModule,
+    MatCardModule,
     MatCheckboxModule,
     MatTableModule,
     MatPaginatorModule
