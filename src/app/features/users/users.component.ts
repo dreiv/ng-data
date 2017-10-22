@@ -18,8 +18,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
   someChecked: boolean;
   allChecked: boolean;
 
+  usersLength: number;
   private uiUsers: User[];
-  private usersLength: number;
 
   userTrackBy = (index: number, item: User): string => item.id;
 
