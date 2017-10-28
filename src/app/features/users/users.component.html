@@ -5,16 +5,10 @@
 
   <mat-table [dataSource]="usersDataSource" [trackBy]="userTrackBy">
 
-    <!-- Column Definition: ID -->
-    <ng-container cdkColumnDef="userId">
-      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
-    </ng-container>
-
-    <!-- Column Definition: Name -->
-    <ng-container matColumnDef="userName">
-      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+    <!-- Column Definitions -->
+    <ng-container *ngFor="let def of data" [matColumnDef]="def.colDef">
+      <mat-header-cell *matHeaderCellDef>{{def.headerDef}}</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row[def.celDef]}}</mat-cell>
     </ng-container>
 
     <!-- Header and Row Declarations -->
@@ -23,8 +17,6 @@
 
   </mat-table>
 
-  <mat-paginator [length]="usersLength"
-                 [pageSize]="10"
-                 [pageSizeOptions]="[10, 25, 50]">
+  <mat-paginator [length]="usersLength" [pageSize]="10" [pageSizeOptions]="[10, 25, 50]">
   </mat-paginator>
 </mat-card>

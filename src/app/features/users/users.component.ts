@@ -5,6 +5,16 @@ import { UsersService } from '../../services/users.service';
 import { User } from '../../shared/type/user.type';
 import { UsersDataSource } from './users.data';
 
+interface Data {
+  colDef: string;
+  headerDef: string;
+  celDef: string;
+}
+
+class DataImpl implements Data {
+  constructor(public colDef, public headerDef, public celDef) {}
+}
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -13,14 +23,21 @@ import { UsersDataSource } from './users.data';
 })
 export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) private paginator: MatPaginator;
-  usersDataSource: UsersDataSource | null;
+  data: DataImpl[];
   displayedColumns: string[] = [];
+  usersDataSource: UsersDataSource | null;
 
   usersLength: number;
 
   userTrackBy = (index: number, item: User): string => item.id;
 
-  constructor(public usersService: UsersService) {}
+  constructor(public usersService: UsersService) {
+    this.data = [
+      new DataImpl('userId', 'Id', 'id'),
+      new DataImpl('userName', 'Name', 'name')
+    ];
+    this.displayedColumns = Array.from(this.data, d => d.colDef);
+  }
 
   ngOnInit() {
     this.connect();
@@ -31,11 +48,6 @@ export class UsersComponent implements OnInit {
   }
 
   connect(): void {
-    this.displayedColumns = [
-      'userId',
-      'userName'
-    ];
-
     this.usersDataSource = new UsersDataSource(this.usersService.dataChange$, this.paginator);
   }
 
