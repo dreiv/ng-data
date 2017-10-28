@@ -1,4 +1,8 @@
 .icon-column {
   flex: inherit;
-  width: 1.5em;
+}
+
+.icon-header {
+  @extend .icon-column;
+  width: 40px;
 }

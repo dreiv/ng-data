@@ -7,9 +7,11 @@
 
     <!-- Edit Row Column Definition -->
     <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef class="icon-column"></mat-header-cell>
+      <mat-header-cell *matHeaderCellDef class="icon-header"></mat-header-cell>
       <mat-cell *matCellDef="let row" class="icon-column">
-        <mat-icon svgIcon="core:edit"></mat-icon>
+        <button mat-icon-button>
+          <mat-icon svgIcon="core:edit"></mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 
@@ -21,9 +23,11 @@
 
     <!-- Delete Row Column Definition -->
     <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef class="icon-column"></mat-header-cell>
+      <mat-header-cell *matHeaderCellDef class="icon-header"></mat-header-cell>
       <mat-cell *matCellDef="let row" class="icon-column">
-        <mat-icon svgIcon="core:delete"></mat-icon>
+        <button mat-icon-button>
+          <mat-icon svgIcon="core:delete"></mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 
