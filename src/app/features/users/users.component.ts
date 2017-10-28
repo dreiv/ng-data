@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material';
+import { MatIconRegistry, MatPaginator } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../shared/type/user.type';
@@ -31,7 +32,11 @@ export class UsersComponent implements OnInit {
 
   userTrackBy = (index: number, item: User): string => item.id;
 
-  constructor(public usersService: UsersService) {
+  constructor(public usersService: UsersService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry
+      .addSvgIconSetInNamespace('core',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/icon-set.svg'));
+
     this.data = [
       new DataImpl('userId', 'Id', 'id'),
       new DataImpl('userName', 'Name', 'name')
