@@ -14,7 +14,6 @@ import { SharedModule } from './shared';
     BrowserAnimationsModule,
     BrowserModule,
 
-    // shared
     SharedModule
   ],
   providers: [UsersService],

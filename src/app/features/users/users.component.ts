@@ -1,7 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material';
+import 'rxjs/add/operator/filter';
 import { UsersService } from '../../services/users.service';
-import { UserImpl } from '../../shared/model/user.model';
 import { User } from '../../shared/type/user.type';
 import { UsersDataSource } from './users.data';
 
@@ -11,62 +11,33 @@ import { UsersDataSource } from './users.data';
   styleUrls: ['./users.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UsersComponent implements OnInit, AfterViewInit {
+export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) private paginator: MatPaginator;
   usersDataSource: UsersDataSource | null;
   displayedColumns: string[] = [];
 
-  someChecked: boolean;
-  allChecked: boolean;
-
   usersLength: number;
-  private uiUsers: User[];
 
   userTrackBy = (index: number, item: User): string => item.id;
 
-  constructor(public usersService: UsersService,
-              private cdr: ChangeDetectorRef) {}
+  constructor(public usersService: UsersService) {}
 
   ngOnInit() {
     this.connect();
-  }
 
-  ngAfterViewInit(): void {
-    this.usersDataSource.connect().subscribe((users: User[]): void => {
-      this.uiUsers = users;
-      this.updateMainCheckbox();
-    });
+    this.usersService.dataChange$
+      .filter(u => this.usersLength !== u.length)
+      .subscribe(u => this.usersLength = u.length);
   }
 
   connect(): void {
     this.displayedColumns = [
-      'checked',
       'userId',
       'userName'
     ];
 
-    this.usersService.dataChange$.subscribe(u => this.usersLength = u.length);
     this.usersDataSource = new UsersDataSource(this.usersService.dataChange$, this.paginator);
   }
 
-  updateAllCheckboxes(checked: boolean): void {
-    this.uiUsers.forEach(u => u.checked = checked);
-  }
-
-  updateMainCheckbox(): void {
-    const checkedUsersNo = this.uiUsers.filter(u => u.checked).length;
-
-    this.someChecked = checkedUsersNo > 0 && checkedUsersNo < this.uiUsers.length;
-    this.allChecked = checkedUsersNo === this.uiUsers.length;
-    this.cdr.markForCheck();
-  }
-
-  deleteChecked() {
-    this.usersService.dataChange$.next(this.usersService.data().filter(u => !u.checked));
-  }
-
-  addRow() {
-    this.usersService.data().splice(0, 0, new UserImpl('a', 'b'));
-    this.usersService.dataChange$.next(this.usersService.data());
-  }
+  addRow() {}
 }
