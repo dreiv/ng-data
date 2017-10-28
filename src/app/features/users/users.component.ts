@@ -41,7 +41,11 @@ export class UsersComponent implements OnInit {
       new DataImpl('userId', 'Id', 'id'),
       new DataImpl('userName', 'Name', 'name')
     ];
-    this.displayedColumns = Array.from(this.data, d => d.colDef);
+    this.displayedColumns = [
+      'edit',
+      ...Array.from(this.data, d => d.colDef),
+      'delete'
+    ];
   }
 
   ngOnInit() {
