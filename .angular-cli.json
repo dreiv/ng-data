@@ -34,15 +34,15 @@
   ],
   "defaults": {
     "styleExt": "scss",
+    "class": {
+      "spec": false
+    },
     "component": {
       "spec": false,
       "inlineStyle": false,
       "inlineTemplate": false
     },
     "directive": {
-      "spec": false
-    },
-    "class": {
       "spec": false
     },
     "guard": {
@@ -57,5 +57,8 @@
     "service": {
       "spec": false
     }
+  },
+  "warnings": {
+    "typescriptMismatch": false
   }
 }
