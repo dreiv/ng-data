@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatIconRegistry, MatPaginator } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
@@ -32,7 +32,10 @@ export class UsersComponent implements OnInit {
 
   userTrackBy = (index: number, item: User): string => item.id;
 
-  constructor(public usersService: UsersService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(private cdr: ChangeDetectorRef,
+              private iconRegistry: MatIconRegistry,
+              private sanitizer: DomSanitizer,
+              private usersService: UsersService) {
     iconRegistry
       .addSvgIconSetInNamespace('core',
         sanitizer.bypassSecurityTrustResourceUrl('assets/icon-set.svg'));
@@ -61,4 +64,16 @@ export class UsersComponent implements OnInit {
   }
 
   addRow() {}
+
+  editRow(row: User) {
+    console.log('edit', row);
+  }
+
+  deleteRow(row: User) {
+    const users = this.usersService.data();
+    users.splice(users.indexOf(row), 1);
+    this.usersService.dataChange$.next(users);
+
+    this.cdr.markForCheck();
+  }
 }
