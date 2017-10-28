@@ -1,7 +1,15 @@
 import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatPaginatorModule, MatTableModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatInputModule,
+  MatPaginatorModule,
+  MatTableModule,
+  MatTooltipModule
+} from '@angular/material';
 import { UsersComponent } from '../features/users/users.component';
 
 @NgModule({
@@ -14,6 +22,7 @@ import { UsersComponent } from '../features/users/users.component';
     MatIconModule,
     MatInputModule,
     MatTableModule,
+    MatTooltipModule,
     MatPaginatorModule
   ],
   declarations: [UsersComponent],

@@ -9,7 +9,7 @@
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef class="icon-header"></mat-header-cell>
       <mat-cell *matCellDef="let row" class="icon-column">
-        <button mat-icon-button>
+        <button mat-icon-button matTooltip="Edit Row" matTooltipPosition="above">
           <mat-icon svgIcon="core:edit"></mat-icon>
         </button>
       </mat-cell>
@@ -25,7 +25,7 @@
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef class="icon-header"></mat-header-cell>
       <mat-cell *matCellDef="let row" class="icon-column">
-        <button mat-icon-button>
+        <button mat-icon-button matTooltip="Delete Row" matTooltipPosition="above">
           <mat-icon svgIcon="core:delete"></mat-icon>
         </button>
       </mat-cell>
