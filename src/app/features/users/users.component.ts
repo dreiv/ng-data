@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { MatIconRegistry, MatPaginator } from '@angular/material';
+import { MatDialog, MatIconRegistry, MatPaginator } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../shared/type/user.type';
+import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { UsersDataSource } from './users.data';
 
 interface Data {
@@ -33,6 +34,7 @@ export class UsersComponent implements OnInit {
   userTrackBy = (index: number, item: User): string => item.id;
 
   constructor(private cdr: ChangeDetectorRef,
+              private dialog: MatDialog,
               private iconRegistry: MatIconRegistry,
               private sanitizer: DomSanitizer,
               private usersService: UsersService) {
@@ -67,6 +69,8 @@ export class UsersComponent implements OnInit {
 
   editRow(row: User) {
     console.log('edit', row);
+
+    const dialogRef = this.dialog.open(UserDialogComponent);
   }
 
   deleteRow(row: User) {
