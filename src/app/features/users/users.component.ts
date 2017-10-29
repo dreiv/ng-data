@@ -3,19 +3,10 @@ import { MatDialog, MatDialogConfig, MatIconRegistry, MatPaginator } from '@angu
 import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
 import { UsersService } from '../../services/users.service';
+import { UserData } from '../../shared/type/user-data.type';
 import { User } from '../../shared/type/user.type';
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { UsersDataSource } from './users.data';
-
-interface Data {
-  colDef: string;
-  headerDef: string;
-  celDef: string;
-}
-
-class DataImpl implements Data {
-  constructor(public colDef, public headerDef, public celDef) {}
-}
 
 @Component({
   selector: 'app-users',
@@ -25,7 +16,7 @@ class DataImpl implements Data {
 })
 export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) private paginator: MatPaginator;
-  data: DataImpl[];
+  userData: UserData[];
   displayedColumns: string[] = [];
   usersDataSource: UsersDataSource | null;
 
@@ -43,13 +34,10 @@ export class UsersComponent implements OnInit {
       .addSvgIconSetInNamespace('core',
         sanitizer.bypassSecurityTrustResourceUrl('assets/icon-set.svg'));
 
-    this.data = [
-      new DataImpl('userId', 'Id', 'id'),
-      new DataImpl('userName', 'Name', 'name')
-    ];
+    this.userData = this.usersService.userData;
     this.displayedColumns = [
       'edit',
-      ...Array.from(this.data, d => d.colDef),
+      ...Array.from(this.userData, d => d.colDef),
       'delete'
     ];
   }

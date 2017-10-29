@@ -16,7 +16,7 @@
     </ng-container>
 
     <!-- Column Definitions -->
-    <ng-container *ngFor="let def of data" [matColumnDef]="def.colDef">
+    <ng-container *ngFor="let def of userData" [matColumnDef]="def.colDef">
       <mat-header-cell *matHeaderCellDef>{{def.headerDef}}</mat-header-cell>
       <mat-cell *matCellDef="let user">{{user[def.celDef]}}</mat-cell>
     </ng-container>

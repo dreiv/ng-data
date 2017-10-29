@@ -1,12 +1,11 @@
 <h2 mat-dialog-title>{{data.title}} User</h2>
 <mat-dialog-content>
-  <mat-form-field>
-    <input matInput [(ngModel)]="user.id" placeholder="Id">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <input matInput [(ngModel)]="user.name" placeholder="Name">
-  </mat-form-field>
+  <ng-container *ngFor="let def of userData">
+    <mat-form-field>
+      <input matInput [(ngModel)]="user[def.celDef]" [placeholder]="def.headerDef">
+    </mat-form-field>
+    <br>
+  </ng-container>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
