@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatIconRegistry, MatPaginator } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatIconRegistry, MatPaginator } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
 import { UsersService } from '../../services/users.service';
@@ -70,7 +70,13 @@ export class UsersComponent implements OnInit {
   editRow(row: User) {
     console.log('edit', row);
 
-    const dialogRef = this.dialog.open(UserDialogComponent);
+    const dialogRef = this.dialog.open(UserDialogComponent, <MatDialogConfig>{
+      data: { user: row }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog result: ', result);
+    });
   }
 
   deleteRow(row: User) {
