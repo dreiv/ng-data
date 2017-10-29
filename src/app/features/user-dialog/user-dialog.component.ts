@@ -13,7 +13,11 @@ export class UserDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.user = Object.assign({}, this.data.user);
+    if (this.data.user) {
+      this.user = Object.assign({}, this.data.user);
+    } else {
+      this.user = <User>{};
+    }
   }
 
 }

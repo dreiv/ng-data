@@ -1,15 +1,15 @@
 <mat-card class="demo-table-card">
   <h3>Users table
-    <button (click)="addRow()" disabled>Add</button>
+    <button (click)="addUser()" mat-button>Add User</button>
   </h3>
 
   <mat-table [dataSource]="usersDataSource" [trackBy]="userTrackBy">
 
-    <!-- Edit Row Column Definition -->
+    <!-- Edit User Column Definition -->
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef class="icon-header"></mat-header-cell>
-      <mat-cell *matCellDef="let row" class="icon-column">
-        <button (click)="editRow(row)" mat-icon-button>
+      <mat-cell *matCellDef="let user" class="icon-column">
+        <button (click)="editUser(user)" mat-icon-button>
           <mat-icon svgIcon="core:edit"></mat-icon>
         </button>
       </mat-cell>
@@ -21,11 +21,11 @@
       <mat-cell *matCellDef="let row">{{row[def.celDef]}}</mat-cell>
     </ng-container>
 
-    <!-- Delete Row Column Definition -->
+    <!-- Delete User Column Definition -->
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef class="icon-header"></mat-header-cell>
       <mat-cell *matCellDef="let row" class="icon-column">
-        <button (click)="deleteRow(row)" mat-icon-button>
+        <button (click)="deleteUser(row)" mat-icon-button>
           <mat-icon svgIcon="core:delete"></mat-icon>
         </button>
       </mat-cell>

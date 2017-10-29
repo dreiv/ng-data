@@ -65,24 +65,39 @@ export class UsersComponent implements OnInit {
     this.usersDataSource = new UsersDataSource(this.usersService.dataChange$, this.paginator);
   }
 
-  addRow() {}
-
-  editRow(row: User) {
+  addUser() {
     const dialogRef = this.dialog.open(UserDialogComponent, <MatDialogConfig>{
-      data: { user: row, title: 'Edit' }
+      data: { title: 'Add' }
     });
 
     dialogRef.afterClosed()
-      .filter(r => r)
-      .subscribe(result => {
-        Object.assign(row, result);
+      .filter(r => Object.keys(r).length > 0)
+      .subscribe((result: User) => {
+        const users = this.usersService.data();
+        users.splice(0, 0, result);
+        this.usersService.dataChange$.next(users);
+
         this.cdr.markForCheck();
       });
   }
 
-  deleteRow(row: User) {
+  editUser(user: User) {
+    const dialogRef = this.dialog.open(UserDialogComponent, <MatDialogConfig>{
+      data: { user: user, title: 'Edit' }
+    });
+
+    dialogRef.afterClosed()
+      .filter(r => r)
+      .subscribe((result: User) => {
+        Object.assign(user, result);
+
+        this.cdr.markForCheck();
+      });
+  }
+
+  deleteUser(user: User) {
     const users = this.usersService.data();
-    users.splice(users.indexOf(row), 1);
+    users.splice(users.indexOf(user), 1);
     this.usersService.dataChange$.next(users);
 
     this.cdr.markForCheck();
