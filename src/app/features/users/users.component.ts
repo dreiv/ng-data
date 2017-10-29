@@ -68,15 +68,16 @@ export class UsersComponent implements OnInit {
   addRow() {}
 
   editRow(row: User) {
-    console.log('edit', row);
-
     const dialogRef = this.dialog.open(UserDialogComponent, <MatDialogConfig>{
-      data: { user: row }
+      data: { user: row, title: 'Edit' }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog result: ', result);
-    });
+    dialogRef.afterClosed()
+      .filter(r => r)
+      .subscribe(result => {
+        Object.assign(row, result);
+        this.cdr.markForCheck();
+      });
   }
 
   deleteRow(row: User) {
