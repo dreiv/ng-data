@@ -30,6 +30,7 @@ export class UsersComponent implements OnInit {
   usersDataSource: UsersDataSource | null;
 
   usersLength: number;
+  selectedUser: User;
 
   userTrackBy = (index: number, item: User): string => item.id;
 
@@ -101,5 +102,9 @@ export class UsersComponent implements OnInit {
     this.usersService.dataChange$.next(users);
 
     this.cdr.markForCheck();
+  }
+
+  selectUser(user: User) {
+    this.selectedUser = user;
   }
 }

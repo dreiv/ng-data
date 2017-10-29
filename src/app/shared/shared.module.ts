@@ -9,8 +9,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatPaginatorModule,
-  MatTableModule,
-  MatTooltipModule
+  MatTableModule
 } from '@angular/material';
 import { UserDialogComponent } from '../features/user-dialog/user-dialog.component';
 import { UsersComponent } from '../features/users/users.component';
@@ -27,7 +26,6 @@ import { UsersComponent } from '../features/users/users.component';
     MatIconModule,
     MatInputModule,
     MatTableModule,
-    MatTooltipModule,
     MatPaginatorModule
   ],
   declarations: [
