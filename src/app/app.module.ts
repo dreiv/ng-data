@@ -8,9 +8,7 @@ import { UsersService } from './services/users.service';
 import { SharedModule } from './shared';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

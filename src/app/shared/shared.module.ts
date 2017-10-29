@@ -11,6 +11,7 @@ import {
   MatPaginatorModule,
   MatTableModule
 } from '@angular/material';
+import { UserChartComponent } from '../features/user-chart/user-chart.component';
 import { UserDialogComponent } from '../features/user-dialog/user-dialog.component';
 import { UsersComponent } from '../features/users/users.component';
 
@@ -30,13 +31,16 @@ import { UsersComponent } from '../features/users/users.component';
   ],
   declarations: [
     UsersComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    UserChartComponent
   ],
   entryComponents: [UserDialogComponent],
   exports: [
     CommonModule,
+    FormsModule,
 
-    UsersComponent
+    UsersComponent,
+    UserChartComponent
   ]
 })
 export class SharedModule {}

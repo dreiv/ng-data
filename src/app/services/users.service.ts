@@ -6,6 +6,8 @@ import { User } from '../shared/type/user.type';
 @Injectable()
 export class UsersService {
   dataChange$: BehaviorSubject<User[]> = new BehaviorSubject([]);
+  selectedUserChange$: BehaviorSubject<User> = new BehaviorSubject(null);
+
   data = (): User[] => this.dataChange$.value;
 
   constructor() {

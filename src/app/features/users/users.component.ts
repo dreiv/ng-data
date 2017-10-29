@@ -100,11 +100,15 @@ export class UsersComponent implements OnInit {
     const users = this.usersService.data();
     users.splice(users.indexOf(user), 1);
     this.usersService.dataChange$.next(users);
+    if (user === this.selectedUser) {
+      this.usersService.selectedUserChange$.next(null);
+    }
 
     this.cdr.markForCheck();
   }
 
   selectUser(user: User) {
     this.selectedUser = user;
+    this.usersService.selectedUserChange$.next(user);
   }
 }
