@@ -20,11 +20,6 @@ export class UserDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.data.user) {
-      this.user = Object.assign({}, this.data.user);
-    } else {
-      this.user = <User>{};
-    }
+    this.user = this.data.user ? Object.assign({}, this.data.user) : <User>{};
   }
-
 }

@@ -16,18 +16,18 @@ export class UsersService {
 
   constructor() {
     this.userData = [
-      new UserDataImpl('userId', 'Id', 'id'),
-      new UserDataImpl('nickname', 'Nickname', 'nickname'),
-      new UserDataImpl('age', 'Age', 'age'),
-      new UserDataImpl('apples', 'Apples', 'apples'),
-      new UserDataImpl('bananas', 'Bananas', 'bananas'),
-      new UserDataImpl('kiwis', 'Kiwis', 'kiwis'),
-      new UserDataImpl('oranges', 'Oranges', 'oranges'),
-      new UserDataImpl('lemons', 'Lemons', 'lemons')
+      new UserDataImpl('userId', 'Id', 'id', 'number'),
+      new UserDataImpl('nickname', 'Nickname', 'nickname', 'text'),
+      new UserDataImpl('age', 'Age', 'age', 'number'),
+      new UserDataImpl('apples', 'Apples', 'apples', 'number'),
+      new UserDataImpl('bananas', 'Bananas', 'bananas', 'number'),
+      new UserDataImpl('kiwis', 'Kiwis', 'kiwis', 'number'),
+      new UserDataImpl('oranges', 'Oranges', 'oranges', 'number'),
+      new UserDataImpl('lemons', 'Lemons', 'lemons', 'number')
     ];
 
     const users = [];
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i < 101; i++) {
       users.push(
         new UserImpl(
           `${i}`,

@@ -17,7 +17,7 @@ import { UsersDataSource } from './users.data';
 export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) private paginator: MatPaginator;
   userData: UserData[];
-  displayedColumns: string[] = [];
+  displayedColumns: string[];
   usersDataSource: UsersDataSource | null;
 
   usersLength: number;
@@ -43,15 +43,10 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.connect();
+    this.usersDataSource = new UsersDataSource(this.usersService.dataChange$, this.paginator);
 
     this.usersService.dataChange$
-      .filter(u => this.usersLength !== u.length)
       .subscribe(u => this.usersLength = u.length);
-  }
-
-  connect(): void {
-    this.usersDataSource = new UsersDataSource(this.usersService.dataChange$, this.paginator);
   }
 
   addUser() {
@@ -63,7 +58,7 @@ export class UsersComponent implements OnInit {
       .filter(r => Object.keys(r).length > 0)
       .subscribe((result: User) => {
         const users = this.usersService.data();
-        users.splice(0, 0, result);
+        users.splice(this.paginator.pageIndex * this.paginator.pageSize, 0, result);
         this.usersService.dataChange$.next(users);
 
         this.cdr.markForCheck();

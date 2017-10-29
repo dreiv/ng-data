@@ -27,15 +27,16 @@ export class UserChartComponent implements OnInit {
   }
 
   ngOnInit() {
+    const multiplier = 30;
     this.usersService.selectedUserChange$
       .subscribe(u => {
         this.user = <ChartUser>u;
         if (u) {
-          this.user.applesOffset = u.apples * 10;
-          this.user.bananasOffset = u.bananas * 10;
-          this.user.kiwisOffset = u.kiwis * 10;
-          this.user.orangesOffset = u.oranges * 10;
-          this.user.lemonsOffset = u.lemons * 10;
+          this.user.applesOffset = u.apples * multiplier;
+          this.user.bananasOffset = u.bananas * multiplier;
+          this.user.kiwisOffset = u.kiwis * multiplier;
+          this.user.orangesOffset = u.oranges * multiplier;
+          this.user.lemonsOffset = u.lemons * multiplier;
         }
 
         this.cdr.markForCheck();
