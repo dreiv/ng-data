@@ -6,15 +6,15 @@ import { UsersService } from '../../services/users.service';
 import { UserData } from '../../shared/type/user-data.type';
 import { User } from '../../shared/type/user.type';
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
-import { UsersDataSource } from './users.data';
+import { UsersDataSource } from './users-data-source';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  selector: 'app-users-table',
+  templateUrl: './users-table.component.html',
+  styleUrls: ['./users-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UsersComponent implements OnInit {
+export class UsersTableComponent implements OnInit {
   @ViewChild(MatPaginator) private paginator: MatPaginator;
   userData: UserData[];
   displayedColumns: string[];
@@ -74,6 +74,9 @@ export class UsersComponent implements OnInit {
       .filter(r => r)
       .subscribe((result: User) => {
         Object.assign(user, result);
+        if (user === this.selectedUser) {
+          this.usersService.selectedUserChange$.next(user);
+        }
 
         this.cdr.markForCheck();
       });

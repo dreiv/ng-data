@@ -13,7 +13,7 @@ import {
 } from '@angular/material';
 import { UserChartComponent } from '../features/user-chart/user-chart.component';
 import { UserDialogComponent } from '../features/user-dialog/user-dialog.component';
-import { UsersComponent } from '../features/users/users.component';
+import { UsersTableComponent } from '../features/users-table/users-table.component';
 
 @NgModule({
   imports: [
@@ -30,7 +30,7 @@ import { UsersComponent } from '../features/users/users.component';
     MatPaginatorModule
   ],
   declarations: [
-    UsersComponent,
+    UsersTableComponent,
     UserDialogComponent,
     UserChartComponent
   ],
@@ -39,7 +39,7 @@ import { UsersComponent } from '../features/users/users.component';
     CommonModule,
     FormsModule,
 
-    UsersComponent,
+    UsersTableComponent,
     UserChartComponent
   ]
 })
