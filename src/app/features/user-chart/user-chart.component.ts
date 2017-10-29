@@ -23,7 +23,7 @@ export class UserChartComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef,
               private usersService: UsersService) {
-    this.userData = this.usersService.userData.slice(2);
+    this.userData = this.usersService.userData.slice(3);
   }
 
   ngOnInit() {

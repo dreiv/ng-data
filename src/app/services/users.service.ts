@@ -4,6 +4,7 @@ import { User } from '../shared';
 import { UserDataImpl } from '../shared/model/user-data.model';
 import { UserImpl } from '../shared/model/user.model';
 import { UserData } from '../shared/type/user-data.type';
+import { getRandomInt, getRandomNickname } from './utils';
 
 @Injectable()
 export class UsersService {
@@ -12,16 +13,12 @@ export class UsersService {
   userData: UserData[];
 
   data = (): User[] => this.dataChange$.value;
-  /**
-   * Returns a random integer between min (inclusive) and max (inclusive)
-   * Using Math.round() will give you a non-uniform distribution!
-   */
-  getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
   constructor() {
     this.userData = [
       new UserDataImpl('userId', 'Id', 'id'),
-      new UserDataImpl('userName', 'Name', 'name'),
+      new UserDataImpl('nickname', 'Nickname', 'nickname'),
+      new UserDataImpl('age', 'Age', 'age'),
       new UserDataImpl('apples', 'Apples', 'apples'),
       new UserDataImpl('bananas', 'Bananas', 'bananas'),
       new UserDataImpl('kiwis', 'Kiwis', 'kiwis'),
@@ -31,21 +28,16 @@ export class UsersService {
 
     const users = [];
     for (let i = 1; i <= 100; i++) {
-      const apples = this.getRandomInt(1, 10);
-      const bananas = this.getRandomInt(2, 14);
-      const kiwis = this.getRandomInt(3, 18);
-      const oranges = this.getRandomInt(1, 6);
-      const lemons = this.getRandomInt(2, 8);
-
       users.push(
         new UserImpl(
           `${i}`,
-          `user ${i}`,
-          apples,
-          bananas,
-          kiwis,
-          oranges,
-          lemons));
+          getRandomNickname(),
+          getRandomInt(7, 55),
+          getRandomInt(1, 20),
+          getRandomInt(2, 14),
+          getRandomInt(3, 18),
+          getRandomInt(1, 6),
+          getRandomInt(2, 8)));
     }
 
     this.dataChange$.next(users);

@@ -2,7 +2,9 @@
 <mat-dialog-content>
   <ng-container *ngFor="let def of userData">
     <mat-form-field>
-      <input matInput [(ngModel)]="user[def.celDef]" [placeholder]="def.headerDef">
+      <input matInput
+             [(ngModel)]="user[def.celDef]"
+             [placeholder]="def.headerDef">
     </mat-form-field>
     <br>
   </ng-container>
