@@ -3,14 +3,15 @@
     <figcaption>
       A graph that shows the number of fruit collected by our Users <span *ngIf="!user" class="faint">(Please select a User...)</span>
     </figcaption>
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="chart" width="420" height="150"
-         aria-labelledby="title" role="img">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="chart" width="100%" height="100px" aria-labelledby="title" role="img">
       <title id="title">A bar chart showing User information</title>
 
       <g class="bar" *ngFor="let def of userData; let i = index">
-        <rect [attr.y]="(i+1) * 20" [attr.width]="user ? 10 * user[def.celDef] : 0"
+        <rect [attr.y]="i * 20"
+              [attr.width]="user ? user[def.celDef + 'Offset'] : 0"
               height="19"></rect>
-        <text [attr.x]="user ? 10 * user[def.celDef] + 10 : 0" [attr.y]="((i+1) * 20) + 15">{{(user ? user[def.celDef] : 0) + ' ' +
+        <text [attr.x]="user ? user[def.celDef + 'Offset'] + 10 : 0"
+              [attr.y]="(i* 20) + 15">{{(user ? user[def.celDef] : 0) + ' ' +
           def.headerDef}}
         </text>
       </g>
